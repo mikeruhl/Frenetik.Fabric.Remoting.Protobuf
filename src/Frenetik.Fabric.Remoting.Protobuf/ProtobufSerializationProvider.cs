@@ -10,18 +10,9 @@ namespace Frenetik.Fabric.Remoting.Protobuf
 {
     public class ProtobufSerializationProvider : IServiceRemotingMessageSerializationProvider
     {
-        private Type _service;
-
-        public ProtobufSerializationProvider(Type iService)
-        {
-            if (iService.GetInterface("IService") == null)
-                throw new ArgumentException("Service Passed must inherit type IService");
-            _service = iService;
-
-        }
         public IServiceRemotingMessageBodyFactory CreateMessageBodyFactory()
         {
-            return new ProtobufMessageFactory(_service);
+            return new ProtobufMessageFactory();
         }
 
         public IServiceRemotingRequestMessageBodySerializer CreateRequestMessageSerializer(Type serviceInterfaceType, IEnumerable<Type> requestWrappedTypes, IEnumerable<Type> requestBodyTypes = null)

@@ -45,7 +45,7 @@ namespace Sender
             var proxyFactory = new ServiceProxyFactory((c) =>
             {
                 return new FabricTransportServiceRemotingClientFactory(
-                    serializationProvider: new ProtobufSerializationProvider(typeof(IReceiverService)));
+                    serializationProvider: new ProtobufSerializationProvider());
             });
 
             while (true)

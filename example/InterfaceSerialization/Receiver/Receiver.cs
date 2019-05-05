@@ -37,7 +37,7 @@ namespace Receiver
         protected override IEnumerable<ServiceInstanceListener> CreateServiceInstanceListeners() => new[]
         {
             new ServiceInstanceListener(c => new FabricTransportServiceRemotingListener(c, this,
-                serializationProvider: new ProtobufSerializationProvider(typeof(IReceiverService))))
+                serializationProvider: new ProtobufSerializationProvider()))
         };
 
     }
