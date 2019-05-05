@@ -3,9 +3,7 @@
 ## Overview
 This library offers a serialization provider for Service Fabric implementing Protobuf.  This replaces the default Data Contract serializer.  You'll typically find this more flexible and faster, but I encourage you to do your own benchmarking before adopting this.
 
-### To use
-
-There is an example project highlighting Protobuf's ability to serialize interfaces, something Data Contract Serializer wasn't build for.  This is located in example/InterfaceSerialization.sln.
+### Getting Started
 
 To get started in an existing project, there are two changes to make:
 
@@ -29,6 +27,12 @@ protected override IEnumerable<ServiceInstanceListener> CreateServiceInstanceLis
 ```
 
 And that's it!
+
+### Example Code
+
+There is an example project highlighting Protobuf's ability to serialize interfaces, something Data Contract Serializer wasn't build for.  This is located in example/InterfaceSerialization.sln.
+
+The example code has an interfacd
 
 ### Additional Notes
 
