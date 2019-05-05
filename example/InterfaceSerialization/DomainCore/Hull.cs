@@ -8,10 +8,13 @@ using ProtoBuf;
 namespace DomainCore
 {
     [ProtoContract]
-    public class OtherThing
+    public class Hull
     {
         [ProtoMember(1)]
         public string Value { get; set; }
+
+        [ProtoMember(2)]
+        public bool WaterProof { get; set; }
 
     }
 }

@@ -8,9 +8,14 @@ using ProtoBuf;
 namespace DomainCore
 {
     [ProtoContract]
-    public interface IThing
+    public class Boat : IVehicle
     {
         [ProtoMember(1)]
-        OtherThing OtherThing { get; set; }
+        private Hull _hull;
+
+        public Hull Hull { get => _hull; set => _hull = value; }
+
+        [ProtoMember(2)]
+        public int Propellers { get; set; }
     }
 }

@@ -8,11 +8,13 @@ using System.Threading.Tasks;
 namespace DomainCore
 {
     [ProtoContract]
-    public class Thing : IThing
+    public class Car : IVehicle
     {
         [ProtoMember(1)]
-        private OtherThing _otherThing;
+        private Hull _hull;
 
-        public OtherThing OtherThing { get => _otherThing; set => _otherThing = value; }
+        public Hull Hull { get => _hull; set => _hull = value; }
+        [ProtoMember(3)]
+        public int Doors { get; set; }
     }
 }

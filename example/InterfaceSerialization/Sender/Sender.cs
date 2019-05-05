@@ -45,7 +45,7 @@ namespace Sender
             var proxyFactory = new ServiceProxyFactory((c) =>
             {
                 return new FabricTransportServiceRemotingClientFactory(
-                    serializationProvider: new ProtobufSerializationProvider());
+                    serializationProvider: new ProtobufSerializationProvider(typeof(IReceiverService)));
             });
 
             while (true)
@@ -58,13 +58,29 @@ namespace Sender
                         proxyFactory.CreateServiceProxy<IReceiverService>(
                             new Uri("fabric:/InterfaceSerialization/Receiver"));
 
-                    var response = await service.GetThing($"Counter{iterations}");
+                    var vehicle = await service.GetVehicle(iterations);
 
-                    ServiceEventSource.Current.ServiceMessage(this.Context, "OtherThing's value: -{0}", response.OtherThing.Value);
+                    switch (vehicle)
+                    {
+                        case Car c:
+                            ServiceEventSource.Current.ServiceMessage(this.Context,
+                                $"I got a car: {c.Hull.Value}.  It has {c.Doors} doors, is it waterproof: {c.Hull.WaterProof}");
+                            break;
+                        case Boat b:
+                            ServiceEventSource.Current.ServiceMessage(this.Context,
+                                $"I got a boat: {b.Hull.Value}.  It has {b.Propellers} propellers, is it waterproof: {b.Hull.WaterProof}");
+                            break;
+                    }
+
+
                 }
                 catch (Exception e)
                 {
                     ServiceEventSource.Current.ServiceMessage(this.Context, $"Experienced Exception: {0}", e.Message);
+                }
+                finally
+                {
+                    iterations++;
                 }
 
 

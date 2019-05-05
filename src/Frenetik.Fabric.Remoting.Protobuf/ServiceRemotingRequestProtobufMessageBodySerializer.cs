@@ -9,18 +9,16 @@ namespace Frenetik.Fabric.Remoting.Protobuf
 {
     public class ServiceRemotingRequestProtobufMessageBodySerializer : IServiceRemotingRequestMessageBodySerializer
     {
+        private IEnumerable<Type> _parameterInfo;
+
         public ServiceRemotingRequestProtobufMessageBodySerializer(Type serviceInterfaceType,
             IEnumerable<Type> parameterInfo)
         {
+            _parameterInfo = parameterInfo;
         }
 
         IOutgoingMessageBody IServiceRemotingRequestMessageBodySerializer.Serialize(IServiceRemotingRequestMessageBody serviceRemotingRequestMessageBody)
         {
-            if (serviceRemotingRequestMessageBody == null)
-            {
-                return null;
-            }
-
             var writeStream = new MemoryStream();
             Serializer.Serialize(writeStream, serviceRemotingRequestMessageBody);
 

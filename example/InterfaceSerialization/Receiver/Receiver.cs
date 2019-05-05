@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 using System.Fabric;
 using System.Threading.Tasks;
@@ -19,11 +20,14 @@ namespace Receiver
             : base(context)
         { }
 
-        public async Task<IThing> GetThing(string value)
+        public async Task<IVehicle> GetVehicle(long id)
         {
-            var thing = new Thing { OtherThing = new OtherThing() };
-            thing.OtherThing.Value = $"Response: {value}";
-            return thing;
+            var random = new Random();
+            if (id % 2 == 0)
+            {
+                return new Car { Hull = new Hull { Value = $"Car Shell: {id}" }, Doors = random.Next(6) };
+            }
+            return new Boat { Hull = new Hull { Value = $"Boat Shell: {id}", WaterProof = true }, Propellers = random.Next(1,3)};
         }
 
         /// <summary>
@@ -33,7 +37,7 @@ namespace Receiver
         protected override IEnumerable<ServiceInstanceListener> CreateServiceInstanceListeners() => new[]
         {
             new ServiceInstanceListener(c => new FabricTransportServiceRemotingListener(c, this,
-                serializationProvider: new ProtobufSerializationProvider()))
+                serializationProvider: new ProtobufSerializationProvider(typeof(IReceiverService))))
         };
 
     }

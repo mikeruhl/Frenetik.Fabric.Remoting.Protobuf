@@ -9,6 +9,6 @@ namespace DomainCore
 {
     public interface IReceiverService: IService
     {
-        Task<IThing> GetThing(string value);
+        Task<IVehicle> GetVehicle(long id);
     }
 }
